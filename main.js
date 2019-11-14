@@ -33,25 +33,29 @@ function addDivsAndButton() {
     let removeButton = document.createElement('button')
     removeButton.id = 'removeButton'
     removeButton.innerText = 'remove'
+    
     //creating a div to append it to the parent div of the image and also it helps keep the components nice 
     let wrapDiv = document.createElement('div')
     wrapDiv.className = `imgDiv class${i}`
-
+    // wrapDiv.id = 'div'+i
     //appending the created div to the main div and the button to the div we created
-
+   
     wrapDiv.append(editButton)
     wrapDiv.append(removeButton)
     wrapDiv.append(allImg[i])
     actualDiv.append(wrapDiv)
+    removeButton.addEventListener("click", function() {
+      removeImg(wrapDiv);
 
+  })
   }
-
   return allImg
 }
 
 //calling the function so it always shows
 
 addDivsAndButton()
+
 //grabing the source of the image on add new image from the input field and adding it to the page
 function addImageSrc() {
   //creating the new img element for the new image
@@ -86,4 +90,13 @@ console.log('this is div count' + howManyDivs.length)
     return lastDiv.append(newImg)
   }
 
+}
+
+//remove img function 
+
+function removeImg(element){
+  console.log('inside the remove function')
+  console.log(element.parentNode)
+  element.parentNode.removeChild(element)
+  return element.remove()
 }
