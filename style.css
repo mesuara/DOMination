@@ -57,4 +57,9 @@
       justify-content: center;
   }
   
-  
+  .imagesDiv{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .

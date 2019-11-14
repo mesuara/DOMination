@@ -15,6 +15,9 @@ function printImg(img, imgIndex) {
   const createDiv = document.createElement('div');
   createDiv.id = 'div'+imgIndex;
   createDiv.className='imagesDiv'
+
+  let createNewDiv = document.createElement('div')
+  createNewDiv.className = 'insideDiv'
   
   const imgElement = document.createElement('img');
   imgElement.id = imgIndex
@@ -33,14 +36,19 @@ function printImg(img, imgIndex) {
 
 
 
+
+   createNewDiv.appendChild(removeButton);
+   createNewDiv.appendChild(editButton);
+   createNewDiv.append(imgElement)
+   createDiv.append(createNewDiv)
    div.append(createDiv)
-   createDiv.appendChild(removeButton);
-  createDiv.appendChild(editButton);
-  createDiv.appendChild(imgElement);
   
   }else{
-    const div = document.querySelector('div:last-child')
+    const div = document.querySelector('.imagesDiv:last-child')
+
     console.log(div)
+    let createNewDiv = document.createElement('div')
+    createNewDiv.className = 'insideDiv'
     const imgElement = document.createElement('img');
   imgElement.id = imgIndex
   imgElement.src = img.url
@@ -54,9 +62,10 @@ function printImg(img, imgIndex) {
   const editButton = document.createElement('button');
   editButton.className = 'editButton'
   editButton.innerText = 'edit'
-  div.appendChild(removeButton);
-  div.appendChild(editButton);
-  div.append(imgElement)
+  createNewDiv.appendChild(removeButton);
+  createNewDiv.appendChild(editButton);
+  createNewDiv.append(imgElement)
+  div.append(createNewDiv)
   }
     
  
@@ -100,7 +109,7 @@ function addToDiv() {
   inputBox.focus();
 }
 
-deleteButton.onclick = handleDelete;
+
 
 function handleDelete() {
   const newImages = [];
