@@ -23,6 +23,10 @@ function printImg(img, imgIndex) {
   const removeButton = document.createElement('button');
   removeButton.className = 'removeBtn'
   removeButton.innerText = 'remove'
+  removeButton.addEventListener('click', function(){
+    img.remove = true
+    handleDelete()
+  })
   const editButton = document.createElement('button');
   editButton.className = 'editButton'
   editButton.innerText = 'edit'
@@ -43,6 +47,10 @@ function printImg(img, imgIndex) {
   const removeButton = document.createElement('button');
   removeButton.className = 'removeBtn'
   removeButton.innerText = 'remove'
+  removeButton.addEventListener('click', function(){
+    img.remove = true
+    handleDelete()
+  })
   const editButton = document.createElement('button');
   editButton.className = 'editButton'
   editButton.innerText = 'edit'
@@ -55,7 +63,6 @@ function printImg(img, imgIndex) {
 
 }
 
-// Here we're passing in the whole todo, so that you can have that object in `printImg`!
 function printImages() {
   let i = 0;
   while (i < images.length) {
@@ -66,7 +73,7 @@ function printImages() {
 }
 
 function addImage(obj) {
-  // What should we take in and what should we push in?
+
  images.push(obj);
 }
 
@@ -78,9 +85,6 @@ function addToDiv() {
   const imgUrl = inputBox.value;
 
 
-  // Be careful when grabbing the `.value` of priorityInput above. Whatever value they choose in their pulldown will come in as a string!
-
-  // Now make a todo object out of all the values above! (And `false` for `completed`!)
   
   const newObj = {
     url: imgUrl,
@@ -88,7 +92,7 @@ function addToDiv() {
     remove: false,
   }
 
-  // Now pass that todo into your `addIMage` and `printImg` functions. Pay attention to what `printImg` takes in as a parameter!
+
 
   addImage(newObj);
   printImg(newObj,  images.length - 1);
@@ -96,8 +100,31 @@ function addToDiv() {
   inputBox.focus();
 }
 
+deleteButton.onclick = handleDelete;
+
+function handleDelete() {
+  const newImages = [];
+
+  // Only push into newTodos any todo that is NOT complete.
+  for (i = 0; i < images.length; i ++) {
+    if (images[i].remove === false) {
+      newImages.push(images[i]);
+    }
+  }
+  
+  images = newImages;
+  clearList();
+  printImages();
+}
+function clearList() {
+
+  const mainDiv = document.querySelector('#mainDiv');
 
 
+  while (mainDiv.hasChildNodes()) {
+    mainDiv.firstChild.remove();
+  }
+}
 
 // function markComplete(index) {
 //   // If it's complete in the data, set it to not complete, and vice versa!
